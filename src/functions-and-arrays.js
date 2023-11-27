@@ -136,7 +136,14 @@ function averageWordLength(wordsArr) {
 }
 
 // Bonus - Iteration #4.1
-function avg() {}
+
+function avg(mixedArr) {
+  if (mixedArr.length === 0) {
+    return null;
+  } else {
+    return sum(mixedArr) / mixedArr.length;
+  }
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -244,7 +251,33 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48,],
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+  function productOfFourRow(elementName,column){
+    let c = column
+    return elementName[c]*elementName[c+1]*elementName[c+2]*elementName[c+3]
+  }
+  function productOfFourColumn(elementName,row){
+    let r = row
+    return elementName[r]*(elementName+1)[r]*(elementName+2)[r]*(elementName+3)[r]
+  }
+  let biggestProduct = 0
+  // loop through each nested array
+  matrix.forEach(function(element){
+// loop through the columns i.e. elements in each row
+for(let i = 0; i < element.length; i++){
+  if(productOfFourRow(element, i)>biggestProduct){
+    biggestProduct = productOfFourRow(element, i)
+  }
+  // loop through the rows in each column
+  for(let j = 0; j < matrix.length; j++){
+    if(productOfFourColumn(element[i], j)>biggestProduct){
+      biggestProduct = productOfFourColumn(element[i], j)
+    }
+}
+  }
+  })
+  return biggestProduct
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
